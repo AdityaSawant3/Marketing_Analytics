@@ -49,6 +49,12 @@ SELECT TOP 10 * FROM dbo.order_payments;
 
 SELECT DISTINCT payment_type FROM dbo.order_payments;
 
+DELETE FROM dbo.order_payments
+WHERE payment_type = 'not_defined';
+
+UPDATE dbo.order_payments
+SET payment_type = REPLACE(payment_type, '_', ' ');
+
 SELECT MAX(payment_installments) AS max_installment FROM dbo.order_payments;
 
 SELECT ROUND(SUM(payment_value), 2) AS total_payment_amount FROM dbo.order_payments;
